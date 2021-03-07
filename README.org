@@ -1,0 +1,13 @@
+#+TITLE: Dynmap Scraper
+#+AUTHOR: MithicSpirit
+
+A tool written in Python for downloading images from Minecraft Dynmaps.
+
+* Using
+** Dependencies
+- Python 3.9+ (64-bit)
+- A large amount of RAM
+- The following python modules (can be installed with ~pip~):
+  + =tqdm=
+  + =Pillow=
+  + =requests=
