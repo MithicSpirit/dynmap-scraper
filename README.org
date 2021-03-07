@@ -1,7 +1,7 @@
 #+TITLE: Dynmap Scraper
 #+AUTHOR: MithicSpirit
 
-A tool written in Python for downloading images from Minecraft Dynmaps.
+A tool written in Python for downloading maps as images from MC server [[https://dev.bukkit.org/projects/dynmap][Dynmaps]].
 
 * Using
 ** Dependencies
@@ -11,3 +11,50 @@ A tool written in Python for downloading images from Minecraft Dynmaps.
   + =tqdm=
   + =Pillow=
   + =requests=
+** Guide
+NOTE: A more user-friendly way of doing this is coming soon™.
+
+Once the aforementioned dependencies are installed, this can be run by executing
+the file =main.py= with =python3.9= (e.g. ~python3.9 main.py~). This will obtain
+a map cropped to the world border at maximum resolution from
+=http://dynmap.elgeis.com:2121/= in world =8302018= and save it to =dynmap.png=,
+using the folder =cache= for cache.
+
+Lines 19--24 can be altered to change what is done. Make sure to keep quotation
+marks around the options that already have it by default (unless otherwise
+specified) and do not remove the commas at the end of each line.
+*** Link (line 19)
+This changes what Dynmap server is actually contacted for the content. The
+default value is for the [[https://www.elgeis.com/][Elgeis Minecraft server]]. In general, you can just copy
+the link in your browser and it will work fine (though make sure to include a
+trailing slash).
+*** World (line 20)
+This changes which world the map is downloaded from. The available worlds can be
+seen in the Dynmap sidebar.
+*** Output (line 21)
+This is where the map file will be saved. The format of the file is inferred
+from the extension (so changing this to =dynmap.jpg= will save it as a JPEG file
+instead).
+*** Cache (line 22)
+This is where an optional cache can be saved. This will speed up subsequent
+downloads if you are downloading overlapping regions and it will allow you to
+resume where you left off if the program crashes.
+
+The cache is quite large and will use up approximately as much space as the
+image itself (or actually a bit more than that). If you do not desire a cache
+you can set this line to =None= (DO remove quotes for this one, otherwise it
+will just use a folder called None instead, but do keep the comma at the end).
+*** Size (line 23)
+This is which region of the world will be downloaded. The default value of
+=None= will attempt to obtain the worldborder from the Dynmap, though this may
+fail depending on whether the world has a worldborder or not.
+
+To specify a region, replace this with =((x₁, x₂), (z₁, z₂))= (do not put any
+quotation marks), where x₁ is the x-coordinate of the left (west) edge of the
+region, x₂ is the x-coordinate of the right (east) edge of the region, z₁ is the
+z-coordinate of the top (north) of the region, and z₂ is the z-coordinate of the
+bottom (south) of the region. Make sure that x₁ < x₂ and z₁ < z₂.
+*** Zoom (line 24)
+This is the level of zoom that is used, with 0 being maximum zoom and 5 being
+minimum zoom. Each additional level of zoom scales down the resolution by a
+factor of 2.
