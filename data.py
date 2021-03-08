@@ -74,16 +74,20 @@ def templating(
     zoomstr = "z" * zoom + "_" if zoom else ""
     link = f"{baselink}tiles/{world}/flat/0_0/{zoomstr}" + "{x}_{z}.png"
 
-    cache = f"{cachefolder}/{world}_{zoomstr}" + "{x}_{z}.png"
+    cache: Optional[str] = f"{cachefolder}/{world}_{zoomstr}" + "{x}_{z}.png"
     try:
         if cachefolder:
             mkdir(cachefolder)
+            print(f"Cache folder “{cachefolder}” was created.")
+        else:
+            cache = None
     except FileExistsError:
         print(f"Cache folder “{cachefolder}” already exists. Continuing.")
     except OSError:
-        print("Unable to create cache folder “{cachefolder}”. Continuing without a cache.")
+        print(
+            "Unable to create cache folder “{cachefolder}”. Continuing "
+            "without a cache."
+        )
         cache = None
-    else:
-        print(f"Cache folder “{cachefolder}” was created.")
 
     return (link, cache)

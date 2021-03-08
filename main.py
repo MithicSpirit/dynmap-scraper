@@ -19,7 +19,7 @@ def main() -> None:
         "http://dynmap.elgeis.com:2121/",
         "8302018",
         "dynmap.png",
-        "cache",
+        None,  # "cache",
         None,
         0,
     )
