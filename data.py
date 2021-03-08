@@ -12,9 +12,9 @@ from typing import Optional
 
 def _get(*args, wrapper_depth: int = 0, **kwargs):
     try:
-        return requests.get(*args, **kwargs)
-    except ConnectionError as err:
-        if wrapper_depth > 5:
+        return requests.get(*args, **kwargs, timeout=30)
+    except requests.exceptions.RequestException as err:
+        if wrapper_depth > 3:
             raise err
         print("Connection refused, trying again in 60 seconds…")
         sleep(60)
@@ -81,7 +81,9 @@ def templating(
     except FileExistsError:
         print(f"Cache folder “{cachefolder}” already exists. Continuing.")
     except OSError:
-        print("Unable to create cache folder “{cachefolder}”. Continuing without a cache.")
+        print(
+            "Unable to create cache folder “{cachefolder}”. Continuing without a cache."
+        )
         cache = None
     else:
         print(f"Cache folder “{cachefolder}” was created.")
