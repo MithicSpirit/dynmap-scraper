@@ -14,7 +14,7 @@ def _get(*args, wrapper_depth: int = 0, **kwargs):
     try:
         return requests.get(*args, **kwargs, timeout=30)
     except requests.exceptions.RequestException as err:
-        if wrapper_depth > 3:
+        if wrapper_depth > 5:
             raise err
         print("Connection refused, trying again in 60 seconds…")
         sleep(60)
