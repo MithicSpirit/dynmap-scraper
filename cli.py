@@ -1,11 +1,11 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python3.9
 """Usage: cli.py [options] <link> <world>
 
 Options:
   -h --help                      Display this help message.
   -c [folder], --cache=[folder]  Optionally set a cache folder.
                                  [default: cache]
-  -C, --no-cache                  Disables cache (overrides --cache).
+  -C, --no-cache                 Disables cache (overrides --cache).
   -o <file>, --output=<file>     Specifies which file to output the image to
                                  [default: dynmap.png]
   --size=[x1,x2,z1,z2]           A comma-separated list of the coordinates of
