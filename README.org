@@ -25,7 +25,7 @@ executing =main.py= directly) use the following:
 #+begin_src sh
 python3.9 cli.py "https://dynmap.elegis.com:2121/" "8302018" --output=dynmap.png --cache=cache --size=worldborder --zoom=0
 #+end_src
-Note that everything from `--output` onwards is optional in this case as it is
+Note that everything from =--output= onwards is optional in this case as it is
 the same as the default values, so
 #+begin_src sh
 python3.9 cli.py "https://dynmap.elegis.com:2121/" "8302018"
