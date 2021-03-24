@@ -5,37 +5,58 @@ A tool written in Python for downloading maps as images from MC server [[https:/
 
 * Using
 ** Dependencies
-- Python 3.9+ (64-bit)
-- A large amount of RAM
+- Python 3.9+ (64-bit, except for very small maps)
 - The following python modules (can be installed with ~pip~):
   + =tqdm=
   + =Pillow=
   + =requests=
+  + =docopt= (for CLI)
+- A reasonable amount of RAM (A 6000×6000 map at maximum zoom will take around
+  2.5 GB of RAM)
 ** Guide
-NOTE: A more user-friendly way of doing this is coming soon™.
+*** CLI
+With the dependencies installed (including =docopt=), the CLI can be run by
+executing =cli.py= with =python3.9= (e.g. ~python3.9 cli.py~). This will fail if
+no additional arguments are provided, though help information can be produced by
+running it with the =--help= flag (e.g. ~python3.9 cli.py --help~).
 
-Once the aforementioned dependencies are installed, this can be run by executing
-the file =main.py= with =python3.9= (e.g. ~python3.9 main.py~). This will obtain
-a map cropped to the world border at maximum resolution from
+To have the same output as the default output from the manual section (i.e. just
+executing =main.py= directly) use the following:
+#+begin_src sh
+python3.9 cli.py "https://dynmap.elegis.com:2121/" "8302018" --output=dynmap.png --cache=cache --size=worldborder --zoom=0
+#+end_src
+Note that everything from =--output= onwards is optional in this case as it is
+the same as the default values, so
+#+begin_src sh
+python3.9 cli.py "https://dynmap.elegis.com:2121/" "8302018"
+#+end_src
+would also work. More information on what this in specific does is available in
+the next section ("Manual").
+
+*** Manual
+Once the aforementioned dependencies are installed (except for =docopt=, which
+is not necessary for this method), this can be run by executing the file
+=main.py= with =python3.9= (e.g. ~python3.9 main.py~). This will obtain a map
+cropped to the world border at maximum resolution from
 =http://dynmap.elgeis.com:2121/= in world =8302018= and save it to =dynmap.png=,
 using the folder =cache= for cache.
 
 Lines 19--24 can be altered to change what is done. Make sure to keep quotation
 marks around the options that already have it by default (unless otherwise
 specified) and do not remove the commas at the end of each line.
-*** Link (line 19)
+**** Link (line 19)
 This changes what Dynmap server is actually contacted for the content. The
 default value is for the [[https://www.elgeis.com/][Elgeis Minecraft server]]. In general, you can just copy
 the link in your browser and it will work fine (though make sure to include a
 trailing slash).
-*** World (line 20)
+**** World (line 20)
 This changes which world the map is downloaded from. The available worlds can be
 seen in the Dynmap sidebar.
-*** Output (line 21)
+**** Output (line 21)
 This is where the map file will be saved. The format of the file is inferred
 from the extension (so changing this to =dynmap.jpg= will save it as a JPEG file
 instead).
-*** Cache (line 22)
+**** Cache (line 22)
 This is where an optional cache can be saved. This will speed up subsequent
 downloads if you are downloading overlapping regions and it will allow you to
 resume where you left off if the program crashes.
@@ -44,7 +65,7 @@ The cache is quite large and will use up approximately as much space as the
 image itself (or actually a bit more than that). If you do not desire a cache
 you can set this line to =None= (DO remove quotes for this one, otherwise it
 will just use a folder called None instead, but do keep the comma at the end).
-*** Size (line 23)
+**** Size (line 23)
 This is which region of the world will be downloaded. The default value of
 =None= will attempt to obtain the worldborder from the Dynmap, though this may
 fail depending on whether the world has a worldborder or not.
@@ -54,7 +75,7 @@ quotation marks), where x₁ is the x-coordinate of the left (west) edge of the
 region, x₂ is the x-coordinate of the right (east) edge of the region, z₁ is the
 z-coordinate of the top (north) of the region, and z₂ is the z-coordinate of the
 bottom (south) of the region. Make sure that x₁ < x₂ and z₁ < z₂.
-*** Zoom (line 24)
+**** Zoom (line 24)
 This is the level of zoom that is used, with 0 being maximum zoom and 5 being
 minimum zoom. Each additional level of zoom scales down the resolution by a
 factor of 2.
