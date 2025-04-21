@@ -1,3 +1,6 @@
+This repository is *unmaintained*. There is a [[https://github.com/ManiaMan111/dynmap-scraper-fork][fork]]
+with support for fetching different kinds of maps (e.g., isometric).
+
 #+TITLE: Dynmap Scraper
 #+AUTHOR: MithicSpirit
 
